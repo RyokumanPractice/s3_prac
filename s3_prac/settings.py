@@ -1,3 +1,4 @@
+import os
 import environ
 from pathlib import Path
 
@@ -11,15 +12,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cxqsdpvb713ou4&tme1*hkcjbv@m@v(qm505n93ws3)*ux#-cv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-S3_ACCESS_KEY = env('access_key')
-S3_SECRET_KEY = env('secret_key')
-
-# env setting
 env = environ.Env(DEBUG=(bool, True))
 environ.Env.read_env(
     env_file=os.path.join(BASE_DIR, '.env')
 )
+
+DEBUG = True
+S3_ACCESS_KEY = env('access_key')
+S3_SECRET_KEY = env('secret_key')
 
 ALLOWED_HOSTS = []
 
@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # plugins
-    'environ'
+    'environ',
     # local_apps
     's3'
 ]
